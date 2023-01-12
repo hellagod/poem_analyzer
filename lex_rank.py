@@ -56,7 +56,7 @@ def compute_cosine_similarity(vocab1, vocab2, poem_vocab):
 
 
 def generate_title(poem):
-    poem = ast.literal_eval(poem)
+    poem = poem.split("\n")
     matrix = create_adj_matrix(poem)
     degrees = compute_lines_degrees(matrix)
     line_prob = sum([line for line in matrix]) * degrees
@@ -74,21 +74,18 @@ def generate_title_with_probabilities(poem):
     matrix = create_adj_matrix(ngramms)
     degrees = compute_lines_degrees(matrix)
     line_sum = sum([line for line in matrix])
-    print("l_sum ", line_sum)
     line_prob = []
     for i, line in enumerate(line_sum):
         el = line if degrees[i] == 0 else line/(2*degrees[i])
         if el > 0:
             line_prob.append(el)
     indexed_prob = np.array([[i, lst] for i, lst in enumerate(line_prob)])
-    print("ind_pr ", indexed_prob)
     sorted_ind = indexed_prob[:, 1].argsort()
     lines_with_prob = []
     size = len(sorted_ind)
-    step = int(size/6) if size > 6 else 0
-    print(step)
-    print(indexed_prob)
-    for i in range(size - 6,size):
+    # step = int(size/6) if size > 6 else 0
+    for i in range(size - 6, size):
         ind = sorted_ind[i]
         lines_with_prob.append([ngramms[ind], indexed_prob[ind, 1]])
     return lines_with_prob
+

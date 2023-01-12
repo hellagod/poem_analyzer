@@ -9,8 +9,8 @@ def create_vocabularies(poem):
     poem_vocab = {}
     lines_vocab = []
     closest_nouns = {'femn': '', 'masc': '', 'neut': ''}
-    for line in poem:
-        line = get_line_words(line)
+    for i in range(len(poem)):
+        line = get_line_words(poem[i])
         if len(line) != 0:
             line_vocab = {}
             for word in line:
@@ -27,7 +27,7 @@ def get_line_words(line):
     word = ""
     words = []
     for i, char in enumerate(line):
-        if (char in " -" or i == len(line) - 1) and word != "":
+        if char in " -" and word != "":
             words.append(word)
             word = ""
         elif (char in " -\n" and word == "") or (char in "«»…"):

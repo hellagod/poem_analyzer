@@ -1,10 +1,12 @@
 import ast
+from itertools import islice
+
 import numpy as np
-from tokenizing import create_vocabularies
+from tokenizing import create_vocabularies, get_line_words, make_one_line, split_to_ngramms
 
 
 def create_adj_matrix(poem):
-    poem_vocab, lines_vocab = create_vocabularies(poem)
+    lines_vocab, poem_vocab = create_vocabularies(poem)
     p_size = len(lines_vocab)
     adj_matrix = np.zeros((p_size, p_size))
     for line_1 in range(p_size):
@@ -60,6 +62,33 @@ def generate_title(poem):
     line_prob = sum([line for line in matrix]) * degrees
     indexed_prob = np.array([[i, lst] for i, lst in enumerate(line_prob)])
     sorted_ind = indexed_prob[:, 1].argsort()
-    print("3 most_prob lines ", [poem[i] for i in sorted_ind[::3]])
-    title_ind = sorted_ind[0] if sorted_ind[0] != 0 else sorted_ind[1]
+    size = len(sorted_ind)
+    title_ind = sorted_ind[size-1] if sorted_ind[0] != 0 else sorted_ind[size-2]
     return poem[title_ind]
+
+
+def generate_title_with_probabilities(poem):
+    poem = make_one_line(poem)
+    words = list(map(lambda x: x.lower(), get_line_words(poem)))
+    ngramms = split_to_ngramms(words, 2)
+    matrix = create_adj_matrix(ngramms)
+    degrees = compute_lines_degrees(matrix)
+    line_sum = sum([line for line in matrix])
+    print("l_sum ", line_sum)
+    line_prob = []
+    for i, line in enumerate(line_sum):
+        el = line if degrees[i] == 0 else line/(2*degrees[i])
+        if el > 0:
+            line_prob.append(el)
+    indexed_prob = np.array([[i, lst] for i, lst in enumerate(line_prob)])
+    print("ind_pr ", indexed_prob)
+    sorted_ind = indexed_prob[:, 1].argsort()
+    lines_with_prob = []
+    size = len(sorted_ind)
+    step = int(size/6) if size > 6 else 0
+    print(step)
+    print(indexed_prob)
+    for i in range(size - 6,size):
+        ind = sorted_ind[i]
+        lines_with_prob.append([ngramms[ind], indexed_prob[ind, 1]])
+    return lines_with_prob

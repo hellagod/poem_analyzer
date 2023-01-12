@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@600;1000&display=swap');
+
+body {
+    background-color: #77BEFF;
+    overflow: hidden;
+}
+
+.cloud {
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin-top: 10%;
+    text-align: center;
+}
+
+.title{
+    transition: font-size 2s ease;
+}
+
+.title:hover {
+    cursor: pointer;
+    font-weight: 1000;
+}
+
+.word {
+    position: fixed;
+    font-size: 23px;
+    color: #77BEFF;
+    -webkit-transition: color 2s ease;
+    -moz-transition: color 2s ease;
+    -o-transition: color 2s ease;
+    font-family: 'Mulish', sans-serif;
+    transition: color 2s ease;
+}
+
+.main-container {
+    z-index: 1;
+    background-color: white;
+    height: 85%;
+    width: 400px;
+    border-radius: 20px 20px 0 0;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    bottom: 0;
+    margin-top: inherit;
+    padding: 20px 40px 20px 40px;
+    transition: transform 1s ease;
+}
+
+h2 {
+    font-family: 'Mulish', sans-serif;
+}
+
+button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #44a6ff;
+    width: 40%;
+    border-color: transparent;
+    border-radius: 15px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 1000;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover, button:active, button:focus {
+    background: #3683cb;
+}
+
+.bg {
+    margin: 0 auto;
+    background-size: cover;
+    width: 100px;
+    height: 20px;
+    position: relative;
+}
+
+.line {
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.trigger {
+}
+
+.line::before, .line::after {
+    content: '';
+    float: left;
+    width: 50px;
+    border-bottom: 5px solid #b2b2b2;
+    bottom: 0;
+    height: 20px;
+    box-sizing: border-box;
+    transform-origin: 0 100%;
+    margin-top: 2px;
+    transition: transform 1s ease, border-color 0.3s ease;
+}
+
+.trigger .line::before {
+    cursor: pointer;
+    transform: rotate(-15deg) translate(4px, 0px);
+}
+
+.trigger .line::after {
+    cursor: pointer;
+    transform: rotate(15deg) translate(-3px, -13px);
+}
+
+.trigger:hover .line::after, .trigger:hover .line::before {
+    border-color: black;
+}
+
+textarea {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 600;
+    height: 80%;
+    width: 90%;
+    font-size: medium;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+@media screen and (max-width: 540px) {
+    .view {
+        width: 400px;
+    }
+}
+
+/* For Tablets */
+@media screen and (min-width: 540px) {
+    .view {
+        width: 600px;
+    }
+}

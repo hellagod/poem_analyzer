@@ -1,0 +1,20 @@
+[API]
+
+TITLE = 'Poem API'
+
+[API.SERVER]
+
+HOST = '0.0.0.0' #'localhost' #'192.168.88.233'
+PORT = 2080
+ENV = 'development'
+DEBUG = false
+
+
+[API.DATABASE]
+
+MONGO_URI = "mongodb://127.0.0.1:27017/poemsAnal"  # "mongodb://host:port/data_base"
+
+[API.DATABASE.COLLECTIONS]
+
+POEM = "poems2"
+

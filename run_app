@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo Start API App
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+path_python="$DIR/.venv/bin/python3"
+path_app="$DIR/run_app.py"
+
+$path_python $path_app
